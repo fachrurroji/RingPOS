@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Menu Item - POS F&amp;B</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#182634",
+                        "surface-darker": "#131e29",
+                        "border-dark": "#223649"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #223649; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #314d68; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-hidden text-slate-900 dark:text-white">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-gray-200 dark:border-border-dark px-6 py-4 bg-white dark:bg-surface-dark shrink-0 z-20">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div>
+<h1 class="text-xl font-bold leading-tight">Add New Item</h1>
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Draft - Last saved 2 mins ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-bold uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+                Unpublished
+            </div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-hidden relative">
+<div class="h-full overflow-y-auto p-6 pb-24">
+<div class="grid grid-cols-12 gap-6 max-w-[1600px] mx-auto h-full">
+<!-- Left Column: Basic Info -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-6">
+<section class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-border-dark shadow-sm">
+<h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                            Basic Details
+                        </h2>
+<div class="space-y-5">
+<label class="block">
+<span class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1.5 block">Item Name</span>
+<input class="w-full bg-gray-50 dark:bg-surface-darker border border-gray-200 dark:border-border-dark rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder-gray-400 dark:text-white" placeholder="e.g. Truffle Mushroom Burger" type="text"/>
+</label>
+<label class="block">
+<span class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1.5 block">Description</span>
+<textarea class="w-full bg-gray-50 dark:bg-surface-darker border border-gray-200 dark:border-border-dark rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder-gray-400 dark:text-white resize-none" placeholder="Describe ingredients, taste profile, etc." rows="4"></textarea>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1.5 block">Base Price ($)</span>
+<input class="w-full bg-gray-50 dark:bg-surface-darker border border-gray-200 dark:border-border-dark rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder-gray-400 dark:text-white font-mono" placeholder="0.00" type="number"/>
+</label>
+<label class="block">
+<span class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1.5 block">Cost ($)</span>
+<input class="w-full bg-gray-50 dark:bg-surface-darker border border-gray-200 dark:border-border-dark rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder-gray-400 dark:text-white font-mono" placeholder="0.00" type="number"/>
+</label>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-border-dark shadow-sm flex-1">
+<h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">category</span>
+                            Category
+                        </h2>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-primary bg-primary/10 text-primary transition-all">
+<span class="material-symbols-outlined">lunch_dining</span>
+<span class="text-xs font-bold">Mains</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-border-dark hover:bg-gray-50 dark:hover:bg-surface-darker text-gray-500 dark:text-gray-400 transition-all">
+<span class="material-symbols-outlined">tapas</span>
+<span class="text-xs font-medium">Appetizer</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-border-dark hover:bg-gray-50 dark:hover:bg-surface-darker text-gray-500 dark:text-gray-400 transition-all">
+<span class="material-symbols-outlined">local_bar</span>
+<span class="text-xs font-medium">Drinks</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-border-dark hover:bg-gray-50 dark:hover:bg-surface-darker text-gray-500 dark:text-gray-400 transition-all">
+<span class="material-symbols-outlined">icecream</span>
+<span class="text-xs font-medium">Dessert</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Center Column: Modifiers (Focus) -->
+<div class="col-span-12 lg:col-span-6 flex flex-col gap-6">
+<section class="bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark shadow-sm h-full flex flex-col">
+<div class="p-5 border-b border-gray-200 dark:border-border-dark flex justify-between items-center bg-gray-50/50 dark:bg-surface-darker/30">
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">tune</span>
+                                    Modifiers &amp; Variants
+                                </h2>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Customize options like toppings, size, or spiciness.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                Add Group
+                            </button>
+</div>
+<div class="p-5 space-y-6 overflow-y-auto flex-1">
+<!-- Modifier Group 1 -->
+<div class="border border-gray-200 dark:border-border-dark rounded-xl overflow-hidden bg-gray-50/30 dark:bg-surface-darker/50">
+<div class="flex items-center justify-between p-4 bg-gray-100/50 dark:bg-surface-darker border-b border-gray-200 dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
+<span class="material-symbols-outlined text-lg">local_fire_department</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Spiciness Level</h3>
+<p class="text-xs text-gray-500">Single selection • Mandatory</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Required</span>
+<div class="w-10 h-6 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+<button class="ml-2 text-gray-400 hover:text-gray-200"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<!-- Option Row -->
+<div class="flex items-center gap-4 group">
+<div class="cursor-move text-gray-600 dark:text-gray-500"><span class="material-symbols-outlined text-lg">drag_indicator</span></div>
+<input class="flex-1 bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 py-2 text-sm focus:border-primary focus:ring-0" type="text" value="Mild"/>
+<div class="relative w-24">
+<span class="absolute left-3 top-2 text-gray-500 text-xs">$</span>
+<input class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 pl-6 py-2 text-sm text-right focus:border-primary focus:ring-0" type="number" value="0.00"/>
+</div>
+<button class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+<!-- Option Row -->
+<div class="flex items-center gap-4 group">
+<div class="cursor-move text-gray-600 dark:text-gray-500"><span class="material-symbols-outlined text-lg">drag_indicator</span></div>
+<input class="flex-1 bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 py-2 text-sm focus:border-primary focus:ring-0" type="text" value="Medium"/>
+<div class="relative w-24">
+<span class="absolute left-3 top-2 text-gray-500 text-xs">$</span>
+<input class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 pl-6 py-2 text-sm text-right focus:border-primary focus:ring-0" type="number" value="0.00"/>
+</div>
+<button class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+<!-- Option Row -->
+<div class="flex items-center gap-4 group">
+<div class="cursor-move text-gray-600 dark:text-gray-500"><span class="material-symbols-outlined text-lg">drag_indicator</span></div>
+<input class="flex-1 bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 py-2 text-sm focus:border-primary focus:ring-0" type="text" value="Spicy"/>
+<div class="relative w-24">
+<span class="absolute left-3 top-2 text-gray-500 text-xs">$</span>
+<input class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 pl-6 py-2 text-sm text-right focus:border-primary focus:ring-0" type="number" value="1.50"/>
+</div>
+<button class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+<button class="text-xs font-bold text-primary flex items-center gap-1 mt-2 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add Option
+                                    </button>
+</div>
+</div>
+<!-- Modifier Group 2 -->
+<div class="border border-gray-200 dark:border-border-dark rounded-xl overflow-hidden bg-gray-50/30 dark:bg-surface-darker/50">
+<div class="flex items-center justify-between p-4 bg-gray-100/50 dark:bg-surface-darker border-b border-gray-200 dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-green-500/10 rounded-lg text-green-500">
+<span class="material-symbols-outlined text-lg">nutrition</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Extra Toppings</h3>
+<p class="text-xs text-gray-500">Multiple selection • Optional</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Optional</span>
+<div class="w-10 h-6 bg-gray-600 rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 w-4 h-4 bg-gray-400 rounded-full shadow-sm"></div>
+</div>
+<button class="ml-2 text-gray-400 hover:text-gray-200"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<!-- Option Row -->
+<div class="flex items-center gap-4 group">
+<div class="cursor-move text-gray-600 dark:text-gray-500"><span class="material-symbols-outlined text-lg">drag_indicator</span></div>
+<input class="flex-1 bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 py-2 text-sm focus:border-primary focus:ring-0" type="text" value="Avocado"/>
+<div class="relative w-24">
+<span class="absolute left-3 top-2 text-gray-500 text-xs">$</span>
+<input class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded px-3 pl-6 py-2 text-sm text-right focus:border-primary focus:ring-0" type="number" value="2.00"/>
+</div>
+<button class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+<button class="text-xs font-bold text-primary flex items-center gap-1 mt-2 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add Option
+                                    </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Media & Routing -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-6">
+<section class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-border-dark shadow-sm">
+<h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">image</span>
+                            Media
+                        </h2>
+<div class="relative w-full aspect-[4/3] rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-surface-darker flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all group overflow-hidden">
+<!-- Placeholder State -->
+<div class="absolute inset-0 z-10 flex flex-col items-center justify-center p-4 text-center group-hover:opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400">add_a_photo</span>
+</div>
+<p class="text-sm font-bold text-gray-600 dark:text-gray-300">Upload Photo</p>
+<p class="text-xs text-gray-400 mt-1">JPG or PNG, max 5MB</p>
+</div>
+<!-- Image Preview (Simulating an uploaded image) -->
+<img alt="Burger preview" class="w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity" data-alt="Delicious gourmet burger with melted cheese and fresh lettuce on a wooden board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC76INl7OuBkvOJTl1boITCbanNncznGuI7ObxO_TlUtFSamqYQGS0vOTsXwQy-0LSJ8mQwN_UtXUN3IvSyTSUyjmZ9abG4vukYvLcLWp50JZYMSovV1tufz3KZlw7KFkXU-SPWYVuG1DNmO562giLSB24gKDc-B3SSNU1uHUFIx9ZqF5L2q_XV-b2yU9GqATL7oG7-BLxCqvge7iMTKir1vN3DMr4I8TgYnrg-Z-jpV1n7BJW6ihHd__jh0gMKpke5YrJmZKXk0Rs"/>
+<!-- Hover Overlay Actions -->
+<div class="absolute inset-0 z-20 hidden group-hover:flex items-center justify-center gap-2 bg-black/40 backdrop-blur-sm">
+<button class="p-2 bg-white text-gray-900 rounded-full hover:bg-gray-100 shadow-lg"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-2 bg-white text-red-500 rounded-full hover:bg-gray-100 shadow-lg"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-border-dark shadow-sm">
+<h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">print</span>
+                            Kitchen Routing
+                        </h2>
+<div class="space-y-4">
+<div>
+<label class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-2 block">Destination Printer</label>
+<div class="relative">
+<select class="w-full bg-gray-50 dark:bg-surface-darker border border-gray-200 dark:border-border-dark rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none appearance-none dark:text-white">
+<option>Main Kitchen</option>
+<option>Bar Area</option>
+<option>Cold Station</option>
+<option>Pizza Oven</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-200 dark:border-border-dark">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex flex-col">
+<span class="text-sm font-bold dark:text-white">Available Online</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Show on delivery apps</span>
+</div>
+<div class="relative">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+<div class="pt-4 border-t border-gray-200 dark:border-border-dark">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex flex-col">
+<span class="text-sm font-bold dark:text-white">Tax Exempt</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Do not apply standard tax</span>
+</div>
+<div class="relative">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-border-dark px-8 py-4 z-50">
+<div class="max-w-[1600px] mx-auto flex items-center justify-between">
+<button class="px-6 py-3 rounded-lg text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+                Delete Item
+            </button>
+<div class="flex items-center gap-4">
+<button class="px-8 py-3 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-surface-darker transition-colors">
+                    Cancel
+                </button>
+<button class="px-8 py-3 rounded-lg bg-primary text-white font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-primary/30 flex items-center gap-2">
+<span class="material-symbols-outlined">save</span>
+                    Save Menu Item
+                </button>
+</div>
+</div>
+</footer>
+</body></html>

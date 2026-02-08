@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Product - Retail POS</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex-none flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1A2633] px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold leading-tight tracking-[-0.015em]">Add Product</h1>
+<span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-primary text-xs font-bold rounded-full uppercase tracking-wide">Retail Mode</span>
+</div>
+<div class="flex gap-3">
+<button class="hidden sm:flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="hidden sm:flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area (Split Screen) -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden">
+<!-- Left Panel: Core Details -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 border-r border-slate-200 dark:border-slate-800 scrollbar-hide">
+<div class="max-w-2xl mx-auto space-y-8">
+<div class="flex flex-col gap-1">
+<h2 class="text-lg font-bold">Core Details</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">Basic information needed for identification.</p>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<!-- Product Name -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Product Name</label>
+<input class="w-full h-12 px-4 rounded-lg bg-white dark:bg-[#1A2633] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400" placeholder="e.g. Vintage Cotton T-Shirt" type="text"/>
+</div>
+<!-- SKU & Barcode -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">SKU / Barcode</label>
+<div class="flex gap-2">
+<input class="flex-1 h-12 px-4 rounded-lg bg-white dark:bg-[#1A2633] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400" placeholder="Scan or enter code" type="text"/>
+<button class="h-12 w-12 flex items-center justify-center bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors border border-primary/20">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+</button>
+</div>
+</div>
+<!-- Category -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Category</label>
+<div class="relative">
+<select class="w-full h-12 px-4 pr-10 rounded-lg bg-white dark:bg-[#1A2633] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none transition-all">
+<option disabled="" selected="" value="">Select a category</option>
+<option value="apparel">Apparel</option>
+<option value="electronics">Electronics</option>
+<option value="home">Home &amp; Garden</option>
+<option value="beauty">Beauty</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
+<!-- Pricing Section -->
+<div class="flex flex-col gap-1">
+<h3 class="text-base font-bold">Pricing Strategy</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Set your cost and retail prices.</p>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Cost Price</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+<input class="w-full h-12 pl-8 pr-4 rounded-lg bg-white dark:bg-[#1A2633] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Selling Price</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+<input class="w-full h-12 pl-8 pr-4 rounded-lg bg-white dark:bg-[#1A2633] border border-primary dark:border-primary/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-bold" placeholder="0.00" type="number"/>
+</div>
+</div>
+</div>
+<!-- Margin Calculator Pill -->
+<div class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-3 rounded-lg w-fit">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-[20px]">trending_up</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estimated Margin</span>
+<span class="text-sm font-bold text-emerald-700 dark:text-emerald-400">-- %</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Media & Advanced -->
+<div class="flex-1 overflow-y-auto bg-slate-50 dark:bg-[#131d27] p-6 md:p-8 scrollbar-hide">
+<div class="max-w-2xl mx-auto space-y-8">
+<!-- Image Upload -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold">Product Image</h2>
+<span class="text-xs font-medium text-slate-500 bg-white dark:bg-[#1A2633] px-2 py-1 rounded border border-slate-200 dark:border-slate-700">Optional</span>
+</div>
+<div class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-white dark:hover:bg-[#1A2633] transition-colors cursor-pointer group bg-white/50 dark:bg-transparent">
+<div class="h-16 w-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[32px] transition-colors">add_photo_alternate</span>
+</div>
+<p class="text-sm font-medium text-slate-900 dark:text-white mb-1">Click to upload or drag and drop</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+</div>
+<!-- Image Preview List (Empty State for now) -->
+<div class="flex gap-4 overflow-x-auto py-2">
+<!-- Placeholder for uploaded images would go here -->
+</div>
+</div>
+<!-- Wholesale Pricing -->
+<div class="flex flex-col gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-lg font-bold">Wholesale Pricing</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">Volume-based discounts</p>
+</div>
+<button class="text-sm font-bold text-primary hover:text-primary/80 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                            Add Tier
+                        </button>
+</div>
+<div class="bg-white dark:bg-[#1A2633] rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="grid grid-cols-12 gap-4 p-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+<div class="col-span-4 pl-2">Min Qty</div>
+<div class="col-span-6">Unit Price</div>
+<div class="col-span-2 text-right pr-2">Action</div>
+</div>
+<!-- Row 1 -->
+<div class="grid grid-cols-12 gap-4 p-3 items-center border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<div class="col-span-4">
+<input class="w-full h-9 px-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm text-center focus:ring-1 focus:ring-primary focus:border-primary outline-none" type="number" value="10"/>
+</div>
+<div class="col-span-6 relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full h-9 pl-6 pr-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" type="number" value="45.00"/>
+</div>
+<div class="col-span-2 flex justify-end">
+<button class="h-8 w-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 gap-4 p-3 items-center hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<div class="col-span-4">
+<input class="w-full h-9 px-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm text-center focus:ring-1 focus:ring-primary focus:border-primary outline-none" type="number" value="50"/>
+</div>
+<div class="col-span-6 relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full h-9 pl-6 pr-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" type="number" value="40.00"/>
+</div>
+<div class="col-span-2 flex justify-end">
+<button class="h-8 w-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Sticky) -->
+<footer class="flex-none bg-white dark:bg-[#1A2633] border-t border-slate-200 dark:border-slate-800 p-4 md:px-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-10">
+<div class="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
+<button class="h-12 px-6 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors min-w-[120px]">
+                Cancel
+            </button>
+<div class="flex items-center gap-4">
+<span class="hidden md:block text-sm text-slate-500 dark:text-slate-400 mr-2">
+                    Changes auto-saved 2m ago
+                </span>
+<button class="h-12 px-8 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-[0.98] min-w-[160px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Save Product
+                </button>
+</div>
+</div>
+</footer>
+</body></html>

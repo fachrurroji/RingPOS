@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FreshMart Retail POS</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#182634",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #314d68;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a6fa5;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-[#223649] px-6 py-3 bg-white dark:bg-[#101a23] shrink-0 z-10">
+<!-- Left: Branding & Status -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">FreshMart Retail</h2>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Connected</span>
+</div>
+</div>
+</div>
+<!-- Universal Search -->
+<label class="hidden md:flex relative group min-w-[320px]">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full p-2.5 pl-10 text-sm text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:ring-primary focus:border-primary dark:bg-[#223649] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary" placeholder="Scan barcode or search item (SKU, Name)..." type="text"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">barcode_scanner</span>
+</div>
+</label>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-[#223649] rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+</span>
+</button>
+<button class="flex items-center gap-3 pl-2 pr-1 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors border border-transparent dark:border-[#223649]">
+<span class="text-sm font-medium hidden sm:block">Cashier: Sarah M.</span>
+<div class="h-8 w-8 rounded-full bg-cover bg-center border-2 border-slate-200 dark:border-slate-600" data-alt="Portrait of a female cashier smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAt0Stnd0X6ESz2aCdEtFRiIV3Vkz2Kiw56gtwAX2Ez3IZCS5RLsDUC1dENurtw-yr3oAUSe9C05x4AKW2lzWRF7bj9tbRSTW3VP7E58QyM8hxCXOk62uDuR3HQ3ld9OTxVZ0z6V3nxb6mrsWDxpD6RC3MVjvDcxUXc75_o_0kPoBMYg5x4_a0_povYHKaiNmt0jTD4PdmSvrZSmXzVNjObqbCjxqh7TrVs3cmTHh7WFmyBy6NwBtM0sdlo4niI1lF11YHhP-g_XSo');"></div>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Column: Inventory (65%) -->
+<section class="flex flex-col w-full lg:w-[65%] h-full border-r border-slate-200 dark:border-[#223649]">
+<!-- Category Tabs -->
+<div class="px-4 py-3 border-b border-slate-200 dark:border-[#223649] bg-white dark:bg-[#101a23]">
+<div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-sm whitespace-nowrap transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+                        All Items
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#223649] text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-[#2c445a] whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">nutrition</span>
+                        Produce
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#223649] text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-[#2c445a] whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+                        Beverages
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#223649] text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-[#2c445a] whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">cookie</span>
+                        Snacks
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#223649] text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-[#2c445a] whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">cleaning_services</span>
+                        Household
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#223649] text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-[#2c445a] whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">bakery_dining</span>
+                        Bakery
+                    </button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 bg-slate-50 dark:bg-[#0b1219]">
+<!-- Quick Keys / Bulk Items -->
+<div class="mb-6">
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 px-1">Quick Keys (Bulk)</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+<button class="relative group overflow-hidden bg-white dark:bg-[#182634] border border-orange-200 dark:border-orange-900/50 hover:border-orange-500 dark:hover:border-orange-500 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:shadow-md transition-all active:scale-95">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+<div class="h-10 w-10 rounded bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">grain</span>
+</div>
+<div class="text-left">
+<div class="font-bold text-sm">Rice 25kg</div>
+<div class="text-xs text-slate-500">$45.00</div>
+</div>
+</button>
+<button class="relative group overflow-hidden bg-white dark:bg-[#182634] border border-orange-200 dark:border-orange-900/50 hover:border-orange-500 dark:hover:border-orange-500 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:shadow-md transition-all active:scale-95">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+<div class="h-10 w-10 rounded bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">propane_tank</span>
+</div>
+<div class="text-left">
+<div class="font-bold text-sm">LPG Cylinder</div>
+<div class="text-xs text-slate-500">$22.50</div>
+</div>
+</button>
+<button class="relative group overflow-hidden bg-white dark:bg-[#182634] border border-orange-200 dark:border-orange-900/50 hover:border-orange-500 dark:hover:border-orange-500 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:shadow-md transition-all active:scale-95">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+<div class="h-10 w-10 rounded bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">egg</span>
+</div>
+<div class="text-left">
+<div class="font-bold text-sm">Egg Tray (30)</div>
+<div class="text-xs text-slate-500">$8.99</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Regular Grid -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 px-1">Inventory</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+<!-- Product Card 1 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Milk bottle on a table" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJc3pkaakcq2Oa6QPPQ-InsJjJ4lWFXp41gNI1s4ztqe0A-kcZmrJbwlgHtqiC0xhR9uBqr6fzkya16e415RoU8nnYsU4mwUJWKDTFzD1sF28Lx5oiPDxdygvDlg_lxiDDP521DE2qVuHLf54i-MSKMFnRQzFV-n8rG_5SPvGrr3_sslso0NiOob0jh2O7_10nxwcz1DTmryNsbLzR1N_Z3lXFGX1rjBxXJbPk9x3QovGS3OHcC37syp-6TTvTzLz16AnkU1aiVP0');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Fresh Whole Milk 1L</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Dairy</span>
+<span class="font-bold text-primary">$2.50</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Loaf of fresh bread" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOQstt1FyqQLbrGYUTPGcORf2wiGPMSyrKdXr3L89JnazVaZ9mM0r9uj1-H6FY_ygUqSYQfangr8RUXmI8gpKbI0-44RER3aAvNV0c3r5jb18LbyER194QW0AYczqDKxiPu-o-SHGzWF6oo_-UizLlz75X4CzrwofCQxQ5TDoNTwITJMgPDTHHVz9jmLb_4Ua6c-my_AGwJiC8_7XAug_gxZxIp8nakVTy_Jgc1VABiGnwUd_1GjH5C51VKCGAv9QyOm_WZ1cNe6w');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Whole Wheat Bread</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Bakery</span>
+<span class="font-bold text-primary">$3.20</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Coca cola bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKQclo7fTUBQw0r2lrZy1dg1eiDUxzsAy-x5Xpyn88JThRNALhBKQlFrWwDus4_N1XqcE2kOJI4Xa7_xmCCP4F0JGbnmo_mr91NhJ35GrDJUOnVmCyY916kV25YspNKmCjDprzzDTPz615nyjGY_CyZOA1NLprGtSq5IpHKQNkWu_k3vejtD9CO-_Z1cs1qwr3xkyjfH6Mgmccv7oppoqxjtwIc--6mUkwngsPjQeQKsferuuVozjroyb8aIHNG3sgOUvOJFvXCiM');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Coca Cola 500ml</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Bev</span>
+<span class="font-bold text-primary">$1.50</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Chocolate bar wrapper" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs5iH4J4vEueaFQTQpLod2dq9GNHsYYEjBoAMb5fc8H_6KcKD4nE68wmTdrshc424tW8KZqrHLUL0cZ_EewDbqlfNjOzMm5D767ZlNxBkzFYU72_UIoFhZGOpaVWrto5HzkXBzBv_BiAWTllTSKncUeM3Eg43BLeq5M2aKv44MbqaXeYG6Yeheit8bye3S2dAX42nmviXOIcacBjih4Hftce21yHnDZO66yN5O4zAkQUfflGEC8KD4rAWm-XKnL1hoHj2InQ2JR7c');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Snickers Bar</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Snacks</span>
+<span class="font-bold text-primary">$0.99</span>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Bar of soap" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9acIAU8UFxPV6zukzNbUCHusDLjrxZwCpZ4JyX1eVTAczxDSmvcljusWSCUnxrgQDbOP3ssi6iTUYoE_R0R030BAtx7kb8b7d0jylXC6jF-iJhfKi7YygAQabNJrK9tgGzFMqzFs4BAWDM9Z-0L-rZIQwrofdYD_zuuNNTO8TnIRnWKRoAavkAUwFqw32VDNSL63JRMSrWjoL-uwzwQit7mcc6bAcu_eM1ewqE3MVq6GNgrxtePH51dMbbzCoqlmQcLL-7AjEz-o');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Dove Soap Bar</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Home</span>
+<span class="font-bold text-primary">$1.20</span>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Apple fruit red" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAI77aI88s6DRtsFAu-sBu6wDkx_ZG0owgHTorhhI8vmmb47qZHRKV_PUtgy2DDf4mrch2-I47MKrvwYmwPqG7d6t9riornL20boN7YcXRRI7TEE9TOnR-eiEAP9Yw9qTjDSJcfB7GXC63MBG59ezBs4ii__UMuZSCK0AmP2l1eV2jHbF8xPmO88SXGQ5QqQUuOmny_Ty9wpVhlVPePnPKiSjmD2AHhKHpG0NyKy0Y38LPso9co3HN_ElQhtI8DyMEdlWOIcYRDrS0');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Red Apples (kg)</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Produce</span>
+<span class="font-bold text-primary">$3.50</span>
+</div>
+</div>
+</div>
+<!-- Product Card 7 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Bag of chips" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeqXIoMiC7B6mJUu8ulwh0PYk_WcoFGuRZUtGYqG0qv1E4Kw00hqNXMVzxHwfPL5a0uAyZw-KynSTv8X1c4Yj3tzmu6cS0MYmbwJOlnj5AWX8xEwQkDj1C05DLiDaGVuqaihRwg1HjJP2QsU4NNQh7xkAlpT8EQRz7i5sF3V151J9yB1KnteEO046U_oUmVHu7bl9DjhBQVIR2yDltnds4f4ssMahje9jNv9fgUaUKKdo4Bcu2wSKp0JenJLe5LJ1pvpT3f7-8Slc');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Lays Classic</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Snacks</span>
+<span class="font-bold text-primary">$1.80</span>
+</div>
+</div>
+</div>
+<!-- Product Card 8 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Shampoo bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOkpHisW0hguwoQxtjduRy2b3IhJ96euauH1zynT7TnCEmIpatd8BByL5pUR06Sy0dih12w4U3Y75FSCH4GRU7d6agGmNOIm_SbJviJ5seYmv0rNL9zPuQY12DybU7q4503-GJ3jS10560zN7MqFGXj_OQtbMUgYeDdG49ETdoNyEtUeZhHmb8JlquiduJrHi6F26ecBfMgOkAfZ-Wbw1N0e_LhpcXIOOuZNyOS7tTTYaBVsghTGUmDNW4rwctqNBW81fno805zLY');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Head &amp; Shoulders</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Home</span>
+<span class="font-bold text-primary">$5.50</span>
+</div>
+</div>
+</div>
+<!-- Product Card 9 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Cans of soup" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcP-jAWtVR-7QBrrZvq_lAUDrXwAt8ZnNNzeovH90WB2efHUC0yI53-Jc9ICcIgWfJ6lslFYXQLUgvIDw1hnGQX4r7rLST8bQ0rgjuep2rnq9urAFWQ96L9IL15_SvvYwAaYO5ioBuhd51g67WP81htb8eifH0tj2S2QRaCOg7pbmIC9bQFgC5oZ78pefUebgG_WeQi1DCMQzuPN_c92Gv4EJSN4_BZkSdqNsjiIstWFBkQ-4yDfERpOQpV_UoQTdhqM241eAJbs8');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Tomato Soup Can</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Pantry</span>
+<span class="font-bold text-primary">$1.10</span>
+</div>
+</div>
+</div>
+<!-- Product Card 10 -->
+<div class="group bg-white dark:bg-[#182634] rounded-lg border border-slate-200 dark:border-[#314d68] overflow-hidden hover:border-primary dark:hover:border-primary cursor-pointer transition-all shadow-sm hover:shadow-md active:scale-95">
+<div class="h-28 w-full bg-cover bg-center" data-alt="Bottles of water" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6UBJpxKZFnGR1KTkPYEWDg-uP4PKsn9KZ9p1DliP0V8FqEqTKxICAYXOT5TjG27CqlKRMI0dUK8Ui4YuPa50e0ybmghLjEU1-ZLZEwQ2DrfXluU5AdRHVksS0Oed17Vne2hAqUE8gbZYPnFBEPf4v3c9U_Zu6KZ_AUR07jvC30alugMHCfT_2pIbI9wY6r8rCVlYZo_e7l9Igf_zF-DUK6q_Q7Q3Gl2MwRJqX0ZnKsnaMaApKoj9v_c8PQXtLDoe_nMeeC_ZSPF8');"></div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-medium text-sm line-clamp-2 leading-tight h-9">Mineral Water 1L</h4>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 text-xs">Bev</span>
+<span class="font-bold text-primary">$0.80</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Action Panel (35%) -->
+<aside class="flex flex-col w-full lg:w-[35%] h-full bg-white dark:bg-[#182634] shadow-2xl z-20">
+<!-- Wholesale Toggle Section -->
+<div class="p-4 border-b border-slate-200 dark:border-[#314d68]">
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#101a23] border border-slate-200 dark:border-[#314d68]">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-slate-200 dark:bg-[#223649] rounded text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold">Wholesale Mode</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Toggle bulk pricing</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Cart Header -->
+<div class="flex items-center justify-between px-6 py-3 border-b border-slate-200 dark:border-[#314d68]">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span class="text-xs font-bold uppercase tracking-wider">Current Order #1024</span>
+</div>
+<button class="text-xs font-medium text-red-500 hover:text-red-400 uppercase tracking-wide">Clear All</button>
+</div>
+<!-- Cart Items List -->
+<div class="flex-1 overflow-y-auto px-4 py-2">
+<div class="flex flex-col gap-2">
+<!-- Cart Item 1 -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#101a23] hover:bg-slate-100 dark:hover:bg-[#15202b] transition-colors border border-transparent dark:border-[#223649]">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-[#223649] flex items-center justify-center text-slate-500 font-bold text-xs">x1</div>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Rice 25kg</h4>
+<div class="text-xs text-slate-500 dark:text-slate-400">@ $45.00/unit</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-bold text-slate-900 dark:text-white">$45.00</span>
+<!-- Delete trigger for mouse users -->
+<button class="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-500 transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#101a23] hover:bg-slate-100 dark:hover:bg-[#15202b] transition-colors border border-transparent dark:border-[#223649]">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-[#223649] flex items-center justify-center text-slate-500 font-bold text-xs">x2</div>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Coca Cola 500ml</h4>
+<div class="text-xs text-slate-500 dark:text-slate-400">@ $1.50/unit</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-bold text-slate-900 dark:text-white">$3.00</span>
+<button class="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-500 transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Cart Item 3 -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-[#101a23] hover:bg-slate-100 dark:hover:bg-[#15202b] transition-colors border border-transparent dark:border-[#223649]">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-[#223649] flex items-center justify-center text-slate-500 font-bold text-xs">x5</div>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Dove Soap Bar</h4>
+<div class="text-xs text-slate-500 dark:text-slate-400">@ $1.20/unit</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-bold text-slate-900 dark:text-white">$6.00</span>
+<button class="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-500 transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals & Pay Section -->
+<div class="mt-auto p-6 bg-slate-50 dark:bg-[#131f2b] border-t border-slate-200 dark:border-[#314d68]">
+<div class="space-y-2 mb-4">
+<div class="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
+<span>Subtotal</span>
+<span class="font-medium text-slate-900 dark:text-white">$54.00</span>
+</div>
+<div class="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
+<span>Tax (10%)</span>
+<span class="font-medium text-slate-900 dark:text-white">$5.40</span>
+</div>
+<div class="flex justify-between text-green-600 dark:text-green-400 text-sm">
+<span>Discount</span>
+<span class="font-medium">-$0.00</span>
+</div>
+<div class="h-px w-full bg-slate-200 dark:bg-[#314d68] my-2"></div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-lg font-bold text-slate-900 dark:text-white">Total</span>
+<span class="text-2xl font-bold text-slate-900 dark:text-white">$59.40</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-2 mb-3">
+<button class="col-span-1 bg-white dark:bg-[#223649] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#314d68] rounded-lg p-2 flex flex-col items-center justify-center hover:bg-slate-50 dark:hover:bg-[#2c445a] transition-colors">
+<span class="material-symbols-outlined text-sm mb-1">loyalty</span>
+<span class="text-[10px] font-bold uppercase">Discount</span>
+</button>
+<button class="col-span-1 bg-white dark:bg-[#223649] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#314d68] rounded-lg p-2 flex flex-col items-center justify-center hover:bg-slate-50 dark:hover:bg-[#2c445a] transition-colors">
+<span class="material-symbols-outlined text-sm mb-1">person_add</span>
+<span class="text-[10px] font-bold uppercase">Customer</span>
+</button>
+<button class="col-span-1 bg-white dark:bg-[#223649] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#314d68] rounded-lg p-2 flex flex-col items-center justify-center hover:bg-slate-50 dark:hover:bg-[#2c445a] transition-colors">
+<span class="material-symbols-outlined text-sm mb-1">pause</span>
+<span class="text-[10px] font-bold uppercase">Hold</span>
+</button>
+<button class="col-span-1 bg-white dark:bg-[#223649] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#314d68] rounded-lg p-2 flex flex-col items-center justify-center hover:bg-slate-50 dark:hover:bg-[#2c445a] transition-colors">
+<span class="material-symbols-outlined text-sm mb-1">more_horiz</span>
+<span class="text-[10px] font-bold uppercase">More</span>
+</button>
+</div>
+<button class="w-full bg-primary hover:bg-blue-600 text-white rounded-lg py-4 px-6 flex items-center justify-between shadow-lg shadow-blue-500/20 active:scale-[0.99] transition-all">
+<span class="text-lg font-bold tracking-wide">CHARGE</span>
+<span class="text-xl font-bold">$59.40</span>
+</button>
+</div>
+</aside>
+</main>
+</body></html>

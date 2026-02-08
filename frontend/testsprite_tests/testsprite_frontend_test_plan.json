@@ -1,0 +1,605 @@
+[
+  {
+    "id": "TC001",
+    "title": "Successful login with valid credentials and correct role assignment",
+    "description": "Verify that users can login with correct username and password and are assigned appropriate role-based permissions (Superadmin, Owner, Staff).",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login screen"
+      },
+      {
+        "type": "action",
+        "description": "Input valid username and password"
+      },
+      {
+        "type": "action",
+        "description": "Submit login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Authentication succeeds and JWT token is issued"
+      },
+      {
+        "type": "assertion",
+        "description": "User is redirected to dashboard appropriate to their business mode and role"
+      },
+      {
+        "type": "assertion",
+        "description": "User's permissions reflect their role capabilities"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Failed login with invalid credentials",
+    "description": "Verify login fails and appropriate error message is displayed when an incorrect username or password is provided.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login screen"
+      },
+      {
+        "type": "action",
+        "description": "Input invalid username or password"
+      },
+      {
+        "type": "action",
+        "description": "Submit login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Authentication fails"
+      },
+      {
+        "type": "assertion",
+        "description": "Error message indicating invalid credentials is shown"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Tenant data isolation enforcement",
+    "description": "Verify that users may only access data belonging to their specific tenant and cross-tenant data access is prevented.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a user belonging to Tenant A"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to access or query data belonging to Tenant B via UI and API"
+      },
+      {
+        "type": "assertion",
+        "description": "Access is denied with authorization error"
+      },
+      {
+        "type": "assertion",
+        "description": "No data from other tenants is visible or retrievable"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Multi-tenant dashboard renders correct mode-specific content",
+    "description": "Verify that the dashboard adapts correctly based on tenant business mode (Retail, F&B, Service) showing relevant statistics and sidebar navigation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as Retail tenant user"
+      },
+      {
+        "type": "assertion",
+        "description": "Retail-specific dashboard with Retail features and stats is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Logout and login as F&B tenant user"
+      },
+      {
+        "type": "assertion",
+        "description": "F&B-specific dashboard with table management, kitchen display is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Logout and login as Service tenant user"
+      },
+      {
+        "type": "assertion",
+        "description": "Service-specific dashboard with calendar bookings and staff management is displayed"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Create new product with valid data",
+    "description": "Verify that users can successfully add new products with all required fields, and product appears in the product list with correct details.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Click 'Add Product' button"
+      },
+      {
+        "type": "action",
+        "description": "Fill in valid product details including name, category, price, and stock"
+      },
+      {
+        "type": "action",
+        "description": "Submit product form"
+      },
+      {
+        "type": "assertion",
+        "description": "Product is added successfully and confirmation is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "New product appears in product list with correct details"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Edit existing product and verify updated details",
+    "description": "Verify users can edit product attributes and changes are persistently saved and reflected in product listings.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to product list"
+      },
+      {
+        "type": "action",
+        "description": "Select an existing product to edit"
+      },
+      {
+        "type": "action",
+        "description": "Modify product attributes such as price, category, or stock"
+      },
+      {
+        "type": "action",
+        "description": "Save changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirmation of successful update is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Updated product details are correctly displayed"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Delete a product and confirm removal from product list",
+    "description": "Verify that users can delete products and that deleted products no longer appear in the product list and are inaccessible.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to product list"
+      },
+      {
+        "type": "action",
+        "description": "Select a product to delete"
+      },
+      {
+        "type": "action",
+        "description": "Initiate product deletion and confirm prompt"
+      },
+      {
+        "type": "assertion",
+        "description": "Product is removed from list and a success message is shown"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to access deleted product details"
+      },
+      {
+        "type": "assertion",
+        "description": "Product details are no longer accessible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Category filtering and search in product management",
+    "description": "Verify that filtering products by category and using search functionality works correctly and updates product listings appropriately.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to product list"
+      },
+      {
+        "type": "action",
+        "description": "Select a product category filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Product list displays only products within selected category"
+      },
+      {
+        "type": "action",
+        "description": "Enter keyword in product search input"
+      },
+      {
+        "type": "assertion",
+        "description": "Product list shows only products that match search criteria"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "POS cashier flow with multiple products and correct cart total",
+    "description": "Verify cashier can add multiple products to cart, quantities are adjustable, and cart total updates correctly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as staff user for Retail mode"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to POS cashier screen"
+      },
+      {
+        "type": "action",
+        "description": "Add multiple products with various quantities to the cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Cart reflects all products with correct quantities and prices"
+      },
+      {
+        "type": "assertion",
+        "description": "Cart total amount sum is correctly calculated and displayed"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "POS payment processing with Cash, Card, and E-Wallet methods",
+    "description": "Verify that POS payment can be completed using all supported payment methods and appropriate receipt is generated post payment.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Add products to cart in POS cashier"
+      },
+      {
+        "type": "action",
+        "description": "Select Cash payment method and complete transaction"
+      },
+      {
+        "type": "assertion",
+        "description": "Payment is successful and receipt is generated"
+      },
+      {
+        "type": "action",
+        "description": "Repeat for Card payment method"
+      },
+      {
+        "type": "assertion",
+        "description": "Payment is successful and receipt is generated"
+      },
+      {
+        "type": "action",
+        "description": "Repeat for E-Wallet payment method"
+      },
+      {
+        "type": "assertion",
+        "description": "Payment is successful and receipt is generated"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "POS cart update and removal of items",
+    "description": "Verify users can update quantity of items in cart or remove items, reflecting accurate cart state and pricing.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Add products to POS cart"
+      },
+      {
+        "type": "action",
+        "description": "Change quantity of an item in cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Cart updates quantity and recalculates total price correctly"
+      },
+      {
+        "type": "action",
+        "description": "Remove an item from cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Item is removed and cart total updates accordingly"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Order history filtering by status and date range",
+    "description": "Verify that order history listing can be filtered using various statuses and date ranges, showing only relevant orders.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Access order history screen"
+      },
+      {
+        "type": "action",
+        "description": "Apply filter for order status (e.g., completed, pending)"
+      },
+      {
+        "type": "assertion",
+        "description": "Order list displays only orders matching selected status"
+      },
+      {
+        "type": "action",
+        "description": "Apply date range filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Order list displays only orders within selected date range"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Expandable order details display",
+    "description": "Verify that clicking on an order expands detailed information including items, quantities, and payment info.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to order history"
+      },
+      {
+        "type": "action",
+        "description": "Select an order entry to expand details"
+      },
+      {
+        "type": "assertion",
+        "description": "Detailed view shows complete order information accurately"
+      },
+      {
+        "type": "action",
+        "description": "Collapse the detailed view"
+      },
+      {
+        "type": "assertion",
+        "description": "Order list returns to condensed view"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Sales reporting displays accurate aggregated data for selected time frame",
+    "description": "Verify that sales charts and daily sales figures reflect correct aggregation of transactional data for specified dates.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to reporting screen"
+      },
+      {
+        "type": "action",
+        "description": "Select a specific date range"
+      },
+      {
+        "type": "assertion",
+        "description": "Dashboard displays charts and sales totals matching aggregated transactional data for range"
+      },
+      {
+        "type": "action",
+        "description": "Change date range and review update"
+      },
+      {
+        "type": "assertion",
+        "description": "Reporting data updates accurately according to new date range"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Settings modification and persistence of changes",
+    "description": "Verify that updating settings (general app config, user roles, printer settings) are saved, persisted on reload, and take effect.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to settings module"
+      },
+      {
+        "type": "action",
+        "description": "Modify general settings, add or edit user roles, and configure printer settings"
+      },
+      {
+        "type": "action",
+        "description": "Save settings changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Settings save confirmation appears"
+      },
+      {
+        "type": "action",
+        "description": "Reload application or module"
+      },
+      {
+        "type": "assertion",
+        "description": "Changes persist and system behavior reflects new settings"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "F&B mode table management operations",
+    "description": "Verify that tables in F&B mode can be created, assigned, and managed properly including table status updates.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as F&B tenant user and navigate to table management"
+      },
+      {
+        "type": "action",
+        "description": "Add a new table with valid attributes"
+      },
+      {
+        "type": "assertion",
+        "description": "New table is visible in the table map with correct status"
+      },
+      {
+        "type": "action",
+        "description": "Update table status (e.g., occupied, available)"
+      },
+      {
+        "type": "assertion",
+        "description": "Table status updates accordingly and persists on reload"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "F&B order modifiers applied correctly during order creation",
+    "description": "Verify that staff can select modifiers for menu items and the modified order reflects correct details and pricing.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Create a new order in F&B POS"
+      },
+      {
+        "type": "action",
+        "description": "Select products with various modifiers (e.g., extra toppings)"
+      },
+      {
+        "type": "assertion",
+        "description": "Order reflects modifiers and adjusted price accordingly"
+      },
+      {
+        "type": "action",
+        "description": "Complete the order"
+      },
+      {
+        "type": "assertion",
+        "description": "Modifiers persist in order summary and history"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Service mode calendar bookings creation and modification",
+    "description": "Verify users can create, edit, and cancel bookings with proper validations and updates displayed in calendar view.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as Service tenant user and access calendar bookings"
+      },
+      {
+        "type": "action",
+        "description": "Create a new booking with required details"
+      },
+      {
+        "type": "assertion",
+        "description": "Booking appears correctly on calendar"
+      },
+      {
+        "type": "action",
+        "description": "Edit the booking's time or details"
+      },
+      {
+        "type": "assertion",
+        "description": "Changes are saved and visible in calendar"
+      },
+      {
+        "type": "action",
+        "description": "Cancel the booking"
+      },
+      {
+        "type": "assertion",
+        "description": "Booking is removed from calendar"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Superadmin creates, edits, deletes tenants and impersonates users securely",
+    "description": "Verify that the Superadmin can perform full CRUD operations on tenants and successfully impersonate tenant users without data leakage.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as Superadmin"
+      },
+      {
+        "type": "action",
+        "description": "Create a new tenant with valid data"
+      },
+      {
+        "type": "assertion",
+        "description": "Tenant appears in tenant list and can be selected"
+      },
+      {
+        "type": "action",
+        "description": "Edit tenant details and save changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Changes are reflected correctly"
+      },
+      {
+        "type": "action",
+        "description": "Delete a tenant and confirm removal"
+      },
+      {
+        "type": "assertion",
+        "description": "Tenant is removed and data inaccessible"
+      },
+      {
+        "type": "action",
+        "description": "Impersonate a user from an existing tenant"
+      },
+      {
+        "type": "assertion",
+        "description": "Superadmin gains access as impersonated user with tenant data isolation enforced"
+      }
+    ]
+  }
+]

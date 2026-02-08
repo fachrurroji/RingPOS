@@ -1,0 +1,101 @@
+{
+    "tech_stack": [
+        "Dart",
+        "Flutter",
+        "Riverpod",
+        "Dio",
+        "Go (Backend)",
+        "Gin",
+        "SQLite",
+        "GORM"
+    ],
+    "features": [
+        {
+            "name": "Authentication",
+            "description": "User login with JWT authentication, role-based access (superadmin, owner, staff)",
+            "files": [
+                "lib/features/auth/login_screen.dart",
+                "lib/data/providers/auth_provider.dart",
+                "lib/data/services/api_service.dart"
+            ]
+        },
+        {
+            "name": "Multi-Tenant Dashboard",
+            "description": "Mode-specific dashboard that adapts based on business type (Retail, F&B, Service)",
+            "files": [
+                "lib/features/dashboard/dashboard_router.dart",
+                "lib/features/admin/screens/admin_dashboard_screen.dart",
+                "lib/features/admin/layouts/admin_layout.dart",
+                "lib/data/providers/business_config_provider.dart"
+            ]
+        },
+        {
+            "name": "Product Management",
+            "description": "CRUD operations for products with tenant isolation, category filtering, and search",
+            "files": [
+                "lib/features/retail/providers/products_provider.dart",
+                "lib/features/retail/dialogs/add_product_dialog.dart",
+                "lib/features/inventory/screens/stock_management_screen.dart",
+                "lib/core/models.dart"
+            ]
+        },
+        {
+            "name": "POS Cashier Flow",
+            "description": "Point of sale interface with product grid, cart management, and payment processing",
+            "files": [
+                "lib/features/retail/screens/retail_pos_screen.dart",
+                "lib/features/retail/screens/payment_screen.dart",
+                "lib/features/retail/providers/cart_provider.dart",
+                "lib/features/retail/widgets/product_grid.dart"
+            ]
+        },
+        {
+            "name": "Order History",
+            "description": "View past orders with filtering by status and date, expandable order details",
+            "files": [
+                "lib/features/orders/screens/order_history_screen.dart",
+                "lib/data/providers/orders_provider.dart"
+            ]
+        },
+        {
+            "name": "Reporting",
+            "description": "Sales analytics and reporting with charts and daily sales data",
+            "files": [
+                "lib/features/reporting/screens/reporting_screen.dart"
+            ]
+        },
+        {
+            "name": "Settings",
+            "description": "Application settings including general, printer, and user management",
+            "files": [
+                "lib/features/settings/screens/settings_screen.dart"
+            ]
+        },
+        {
+            "name": "F&B Mode",
+            "description": "Restaurant-specific features including table management, kitchen display, and modifiers",
+            "files": [
+                "lib/features/fnb/screens/fnb_dashboard_screen.dart",
+                "lib/features/fnb/screens/fnb_pos_screen.dart",
+                "lib/features/fnb/widgets/table_map.dart",
+                "lib/features/fnb/widgets/fnb_order_panel.dart"
+            ]
+        },
+        {
+            "name": "Service Mode",
+            "description": "Service-based business features including calendar, bookings, and staff management",
+            "files": [
+                "lib/features/service/screens/service_dashboard_screen.dart",
+                "lib/features/service/screens/service_pos_screen.dart",
+                "lib/features/service/providers/service_providers.dart"
+            ]
+        },
+        {
+            "name": "Superadmin Panel",
+            "description": "Multi-tenant management for superadmins including tenant CRUD and impersonation",
+            "files": [
+                "lib/features/superadmin/screens/superadmin_dashboard_screen.dart"
+            ]
+        }
+    ]
+}

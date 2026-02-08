@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPOS - Payment Success</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                        "surface-dark": "#193319", // Adapted from example
+                        "surface-darker": "#112211", // Darker background
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased overflow-hidden h-screen flex flex-col">
+<!-- Main Content Background (Simulating the previous screen under a modal overlay) -->
+<!-- We blur this area slightly to focus on the modal -->
+<div class="flex-1 flex flex-col relative blur-[2px] opacity-40 pointer-events-none select-none">
+<!-- Top Nav (Reused Style) -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#234823] px-10 py-3 bg-[#112211]">
+<div class="flex items-center gap-4 text-white">
+<span class="material-symbols-outlined text-primary">point_of_sale</span>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">OmniPOS</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC_PhYFGDqjPyoGlHF74lMFiSYIVEiL4Ct7NTjL11wHLg5wD2Avwhiw-pEng9QoILZxBNRaB1hE5ZY7PKaejbeoKuNrKkhUVxEWzuH9f5eaFncg-8Pg8WyME3zRxqJ6C2i98W6QEM_2xaFMQagmVAgKaaYK2NjeBScrKFxdbbNGTY9C9XvgBnxj3TjR3i1QJ5RkEswOPFJ0O2l5WfRhF0Hgt-Co9BBD06jzT51i181aEZj2TkO1nQd9MunNbz7Y1aAnYB9ueOjD2hg");'></div>
+</div>
+</header>
+<!-- Mock Content Behind Modal -->
+<div class="flex-1 grid grid-cols-12 gap-6 p-6">
+<div class="col-span-8 bg-[#193319] rounded-xl h-full"></div>
+<div class="col-span-4 bg-[#112211] rounded-xl border border-[#234823] h-full"></div>
+</div>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 backdrop-blur-sm bg-black/40">
+<!-- Success Card Container -->
+<div class="bg-[#112211] border border-[#234823] w-full max-w-5xl rounded-2xl shadow-2xl flex flex-col lg:flex-row overflow-hidden max-h-[90vh]">
+<!-- LEFT PANEL: Digital Receipt -->
+<div class="w-full lg:w-5/12 bg-white dark:bg-[#193319] flex flex-col relative">
+<!-- Receipt Header -->
+<div class="p-6 pb-4 text-center border-b border-[#234823] border-dashed">
+<div class="mx-auto size-16 bg-white dark:bg-[#112211] rounded-full flex items-center justify-center mb-4 border border-[#234823]">
+<!-- Brand Logo Placeholder -->
+<span class="material-symbols-outlined text-primary text-3xl">storefront</span>
+</div>
+<h3 class="text-gray-900 dark:text-white text-xl font-bold">The Coffee House</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">123 Main St, New York, NY</p>
+<div class="mt-4 flex justify-between text-xs text-gray-500 dark:text-gray-400">
+<span>Order #12345</span>
+<span>Oct 24, 2023 • 10:42 AM</span>
+</div>
+</div>
+<!-- Receipt Items (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+<!-- Item 1 -->
+<div class="flex items-start justify-between group">
+<div class="flex gap-3">
+<div class="bg-gray-100 dark:bg-[#112211] rounded size-8 flex items-center justify-center shrink-0">
+<span class="text-xs font-bold text-gray-700 dark:text-gray-300">1x</span>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">Cappuccino</p>
+<p class="text-gray-500 dark:text-gray-400 text-xs">Oat Milk, Extra Hot</p>
+</div>
+</div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">$4.50</p>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start justify-between group">
+<div class="flex gap-3">
+<div class="bg-gray-100 dark:bg-[#112211] rounded size-8 flex items-center justify-center shrink-0">
+<span class="text-xs font-bold text-gray-700 dark:text-gray-300">2x</span>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">Almond Croissant</p>
+</div>
+</div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">$7.00</p>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start justify-between group">
+<div class="flex gap-3">
+<div class="bg-gray-100 dark:bg-[#112211] rounded size-8 flex items-center justify-center shrink-0">
+<span class="text-xs font-bold text-gray-700 dark:text-gray-300">1x</span>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">Avocado Toast</p>
+<p class="text-gray-500 dark:text-gray-400 text-xs">Add Poached Egg</p>
+</div>
+</div>
+<p class="text-gray-900 dark:text-white font-medium text-sm">$12.50</p>
+</div>
+<div class="border-t border-[#234823] border-dashed my-4"></div>
+<!-- Totals -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Subtotal</span>
+<span class="text-gray-900 dark:text-white font-medium">$24.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Tax (8%)</span>
+<span class="text-gray-900 dark:text-white font-medium">$1.92</span>
+</div>
+<div class="flex justify-between text-sm text-primary">
+<span>Discount</span>
+<span>-$0.00</span>
+</div>
+</div>
+</div>
+<!-- Receipt Total Footer -->
+<div class="p-6 bg-[#152a15] dark:bg-[#132613] border-t border-[#234823]">
+<div class="flex justify-between items-end">
+<span class="text-gray-400 text-sm font-medium uppercase tracking-wider">Total Amount</span>
+<span class="text-white text-2xl font-bold">$25.92</span>
+</div>
+<div class="flex items-center gap-2 mt-2 text-[#92c992] text-xs">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Paid via Visa ending in 4242</span>
+</div>
+</div>
+<!-- Ticket Rip Effect (Visual Decoration) -->
+<div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-full lg:block hidden">
+<div class="h-full w-[1px] border-r border-dashed border-[#234823] relative"></div>
+</div>
+</div>
+<!-- RIGHT PANEL: Success & Actions -->
+<div class="w-full lg:w-7/12 p-8 lg:p-12 flex flex-col justify-between bg-[#112211]">
+<!-- Success State -->
+<div class="flex flex-col items-center text-center mb-10">
+<div class="size-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 animate-pulse">
+<div class="size-12 rounded-full bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(19,236,19,0.5)]">
+<span class="material-symbols-outlined text-black font-bold text-3xl">check</span>
+</div>
+</div>
+<h1 class="text-3xl font-bold text-white mb-2 tracking-tight">Payment Successful</h1>
+<p class="text-[#92c992]">Transaction completed successfully.</p>
+</div>
+<!-- Action Options -->
+<div class="space-y-6 max-w-md mx-auto w-full flex-1">
+<!-- Send Receipt Section -->
+<div class="space-y-4">
+<p class="text-sm font-medium text-gray-400 uppercase tracking-wider">Receipt Options</p>
+<!-- Email Input Group -->
+<div class="flex gap-2">
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 rounded-lg border-0 bg-[#193319] text-white placeholder-gray-500 focus:ring-2 focus:ring-primary sm:text-sm" placeholder="customer@email.com" type="email"/>
+</div>
+<button class="bg-[#193319] hover:bg-[#234823] text-primary font-bold py-2 px-4 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<!-- Action Grid -->
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-3 w-full py-4 px-4 bg-[#193319] hover:bg-[#234823] text-white rounded-lg transition-all duration-200 border border-transparent hover:border-[#92c992]/30 group">
+<span class="material-symbols-outlined text-[#92c992] group-hover:text-primary">print</span>
+<span class="font-bold text-sm">Print Receipt</span>
+</button>
+<button class="flex items-center justify-center gap-3 w-full py-4 px-4 bg-[#193319] hover:bg-[#234823] text-white rounded-lg transition-all duration-200 border border-transparent hover:border-[#25D366]/30 group">
+<span class="material-symbols-outlined text-[#25D366] group-hover:scale-110 transition-transform">chat</span>
+<span class="font-bold text-sm">WhatsApp</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Sticky Action -->
+<div class="mt-8 pt-6 border-t border-[#234823]">
+<button class="w-full bg-primary hover:bg-[#0fd00f] text-black text-lg font-bold py-4 px-6 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-200 flex items-center justify-center gap-2 transform active:scale-[0.99]">
+<span class="material-symbols-outlined font-bold">add_circle</span>
+                        Start New Transaction
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
