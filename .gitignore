@@ -1,0 +1,29 @@
+# Flutter SDK
+flutter/
+flutter.zip
+
+# Database
+*.db
+data/
+
+# Build outputs
+build/
+.dart_tool/
+
+# Dependencies
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test outputs
+testsprite_tests/tmp/
