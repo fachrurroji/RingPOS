@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme.dart';
 import '../../retail/providers/products_provider.dart';
 import '../dialogs/import_stock_dialog.dart';
+import '../dialogs/stock_adjustment_dialog.dart';
+import '../dialogs/stock_history_dialog.dart';
+import 'supplier_management_screen.dart';
 
 class StockManagementScreen extends ConsumerStatefulWidget {
   const StockManagementScreen({super.key});
@@ -57,6 +60,11 @@ class _StockManagementScreenState extends ConsumerState<StockManagementScreen> {
             onPressed: () => _exportStock(),
             icon: const Icon(Icons.download, color: AppTheme.textSecondary),
             label: const Text('Export', style: TextStyle(color: AppTheme.textSecondary)),
+          ),
+          TextButton.icon(
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SupplierManagementScreen())),
+            icon: const Icon(Icons.local_shipping, color: AppTheme.accentBlue),
+            label: const Text('Suppliers', style: TextStyle(color: AppTheme.accentBlue)),
           ),
           const SizedBox(width: 16),
         ],
@@ -335,8 +343,13 @@ class _StockManagementScreenState extends ConsumerState<StockManagementScreen> {
                             ),
                             IconButton(
                               icon: const Icon(Icons.edit_outlined, color: AppTheme.accentBlue),
-                              onPressed: () => _showStockDialog(product),
-                              tooltip: 'Set Stock',
+                              onPressed: () => _showAdjustmentDialog(product),
+                              tooltip: 'Adjust Stock',
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.history, color: AppTheme.textSecondary),
+                              onPressed: () => _showHistoryDialog(product),
+                              tooltip: 'View History',
                             ),
                           ],
                         ),
@@ -424,6 +437,30 @@ class _StockManagementScreenState extends ConsumerState<StockManagementScreen> {
       const SnackBar(
         content: Text('Exporting stock data...'),
         backgroundColor: AppTheme.accentBlue,
+      ),
+    );
+  }
+
+  void _showAdjustmentDialog(product) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => StockAdjustmentDialog(
+        productId: int.parse(product.id),
+        productName: product.name,
+        currentStock: product.stock,
+      ),
+    );
+    if (result == true) {
+      ref.refresh(productsProvider);
+    }
+  }
+
+  void _showHistoryDialog(product) {
+    showDialog(
+      context: context,
+      builder: (context) => StockHistoryDialog(
+        productId: int.parse(product.id),
+        productName: product.name,
       ),
     );
   }

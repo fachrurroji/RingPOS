@@ -210,33 +210,3 @@ func GetDailySales(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
-// GetDailySales - GET /api/orders/daily-sales
-func GetDailySales(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Get today's date
-		today := time.Now().Format("2006-01-02")
-		
-		var result struct {
-			Total float64 `json:"total"`
-			Count int64   `json:"count"`
-		}
-		
-		query := db.Model(&models.Order{}).
-			Where("DATE(created_at) = ?", today).
-			Where("status = ?", "PAID")
-		
-		// Tenant isolation
-		role, _ := c.Get("role")
-		if role != "superadmin" {
-			tenantID, exists := c.Get("tenant_id")
-			if exists && tenantID != nil {
-				query = query.Where("tenant_id = ?", *tenantID.(*uint))
-			}
-		}
-		
-		query.Select("COALESCE(SUM(total), 0) as total, COUNT(*) as count").
-			Scan(&result)
-		
-		c.JSON(http.StatusOK, result)
-	}
-}

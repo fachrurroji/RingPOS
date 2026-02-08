@@ -96,6 +96,19 @@ func main() {
 
 			// Import
 			protected.POST("/products/import", handlers.ImportProducts(db))
+
+			// Stock Management
+			protected.GET("/stock/logs", handlers.GetStockLogs(db))
+			protected.GET("/stock/logs/:productId", handlers.GetProductStockHistory(db))
+			protected.POST("/stock/adjust", handlers.AdjustStock(db))
+			protected.POST("/stock/restock", handlers.RestockProduct(db))
+
+			// Suppliers
+			protected.GET("/suppliers", handlers.GetSuppliers(db))
+			protected.GET("/suppliers/:id", handlers.GetSupplier(db))
+			protected.POST("/suppliers", handlers.CreateSupplier(db))
+			protected.PUT("/suppliers/:id", handlers.UpdateSupplier(db))
+			protected.DELETE("/suppliers/:id", handlers.DeleteSupplier(db))
 		}
 
 		// Superadmin routes (require superadmin role)

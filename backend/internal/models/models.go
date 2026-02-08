@@ -64,3 +64,28 @@ type Customer struct {
 	Notes    string `json:"notes"`
 }
 
+// StockLog tracks all inventory changes
+type StockLog struct {
+	gorm.Model
+	TenantID     uint   `json:"tenant_id"`
+	ProductID    uint   `json:"product_id"`
+	Product      Product `json:"product" gorm:"foreignKey:ProductID"`
+	ChangeAmount int    `json:"change_amount"` // Positive for IN, Negative for OUT
+	Type         string `json:"type"`          // sale, restock, adjustment, return
+	Reason       string `json:"reason"`        // e.g., "Sold", "Damaged", "Expired", "Stock Opname"
+	ReferenceID  *uint  `json:"reference_id"`  // Order ID or other reference
+	UserID       uint   `json:"user_id"`
+	Username     string `json:"username"`      // Denormalized for easy display
+}
+
+// Supplier for managing suppliers
+type Supplier struct {
+	gorm.Model
+	TenantID      uint   `json:"tenant_id"`
+	Name          string `json:"name"`
+	ContactPerson string `json:"contact_person"`
+	Phone         string `json:"phone"`
+	Email         string `json:"email"`
+	Address       string `json:"address"`
+	Notes         string `json:"notes"`
+}
